@@ -1,6 +1,5 @@
 package com.string;
 
-import java.util.*;
 /**
  * Created by major on 16/9/18.
  */
