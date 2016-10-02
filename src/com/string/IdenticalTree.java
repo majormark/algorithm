@@ -30,7 +30,7 @@ public class IdenticalTree {
         char[] strBArray = strB.toCharArray();
         int j = 0;
         int i = 0;
-        while (i < strAArray.length && j<strBArray.length) {
+        while (i < strAArray.length && j < strBArray.length) {
             if(j == -1 || strAArray[i] == strBArray[j]) {
                 i++;
                 j++;

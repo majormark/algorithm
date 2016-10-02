@@ -110,7 +110,11 @@ public class Iterator {
                     node = stack.pop();
                     System.out.println(node.val);
                     prev = node;
-                    node = stack.peek().right;
+                    if(!stack.empty()) {
+                        node = stack.peek().right;
+                    } else {
+                        node = null;
+                    }
                 }
             }
         }
