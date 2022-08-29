@@ -91,26 +91,21 @@ public class Iterator {
      */
     public List<Integer> postOrderIteration(TreeNode root) {
         List<Integer> res = new LinkedList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode node = root;
+        Stack<TreeNode> s = new Stack<>();
         TreeNode pre = null;
-        while (node != null || stack.size() > 0) {
-            while (node != null) {
-                stack.push(node);
-                node = node.left;
+        while (!s.isEmpty() || root != null) {
+            while (root != null) {
+                s.push(root);
+                root = root.left;
             }
-            if (stack.size() > 0) {
-                node = stack.peek().right;
-                if (node == null || node.right == pre) {
-                    node = stack.pop();
-                    res.add(node.val);
-                    pre = node;
-                    if (stack.size() > 0) {
-                        node = stack.peek().right;
-                    } else {
-                        node = null;
-                    }
-                }
+            root = s.pop();
+            if (root.right == null || root.right == pre) {
+                res.add(root.val);
+                root = s.pop();
+                pre = root;
+            } else {
+                s.push(root);
+                root = root.right;
             }
         }
         return res;
