@@ -22,7 +22,7 @@ public class RadixSort {
         int negi = 0;
         for(int i=0;i<n;i++) {
             if(A[i] >= 0) {
-                posArr[posi++] = A[i];
+                posArr[posi++] = -A[i];
             } else {
                 negArr[negi++] = A[i];
             }

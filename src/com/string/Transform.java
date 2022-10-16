@@ -46,4 +46,25 @@ public class Transform {
         }
         return map;
     }
+
+    public boolean isDeformation(String s1, String s2) {
+        if (s1 == null || s2 == null) {
+            return false;
+        }
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+        char[] ch1 = s1.toCharArray();
+        char[] ch2 = s2.toCharArray();
+        int[] map = new int[256];
+        for (int i=0;i<ch1.length;i++) {
+            map[ch1[i]]++;
+        }
+        for (int i=0;i<ch2.length;i++) {
+            if (map[ch2[i]]-- != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

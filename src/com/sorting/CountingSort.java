@@ -24,4 +24,25 @@ public class CountingSort {
         }
         return A;
     }
+
+    public int[] count(int[] arr, int n) {
+        int min = arr[0];
+        int max = arr[0];
+        for (int i=1;i<n;i++) {
+            if (arr[i] > max) max = arr[i];
+            if (arr[i] < min) min = arr[i];
+        }
+        int[] count = new int[max - min + 1];
+        for (int i=0;i<n;i++) {
+            count[arr[i] - min]++;
+        }
+        int index = 0;
+        for (int i=0;i<count.length;i++) {
+            while (count[i] > 0) {
+                arr[index++] = i + min;
+                count[i]--;
+            }
+        }
+        return arr;
+    }
 }

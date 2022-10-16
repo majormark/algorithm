@@ -5,6 +5,8 @@ package com.string;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.print(new Rotation().chkRotation("cdab", 4, "abcd", 4));
+
+        System.out.println(Integer.MIN_VALUE % 10);
+
     }
 }
