@@ -1,5 +1,8 @@
 package com.array;
 
+/**
+ * 数组中子数组的最大累乘积
+ */
 public class CumulativeMultiply {
     public double getMaxMultiply(double[] arr) {
         double max = arr[0];
