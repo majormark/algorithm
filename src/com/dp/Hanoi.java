@@ -25,7 +25,6 @@ public class Hanoi {
             return (1 << i) + rest;
         }
     }
-
     public int step2(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;

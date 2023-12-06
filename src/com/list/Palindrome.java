@@ -27,7 +27,42 @@ package com.list;
 public class Palindrome {
     public boolean isPalindrome(ListNode pHead) {
         // write code here
-
+        if (pHead == null || pHead.next == null) {
+            return true;
+        }
+        ListNode slow = pHead;
+        ListNode fast = pHead.next;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode pre = slow;
+        if (fast.next != null) {
+            pre = pre.next;
+        }
+        ListNode rStartTmp = reverse(pre, pre.next);
+        pre.next = null;
+        ListNode rStart = rStartTmp;
+        ListNode lStart = pHead;
+        while (lStart != null) {
+            if (lStart.val != rStart.val) {
+                return false;
+            }
+            lStart = lStart.next;
+            rStart = rStart.next;
+        }
+        reverse(null, rStartTmp);
         return true;
+    }
+
+    public ListNode reverse(ListNode pre, ListNode cur) {
+        ListNode next = null;
+        while (cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 }

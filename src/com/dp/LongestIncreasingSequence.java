@@ -65,29 +65,26 @@ public class LongestIncreasingSequence {
         return dp;
     }
 
-    public int[] getDp2(int[] arr) {
-        int n = arr.length;
-        int[] dp = new int[n];
-        int[] ends = new int[n];
-        int l;
-        int r;
-        int m;
+    public int[] getDp3(int[] arr) {
+        int[] dp = new int[arr.length];
+        int[] ends = new int[arr.length];
         int right = 0;
         dp[0] = 1;
-        for (int i=1;i<n;i++) {
-            l = 0;
-            r = right;
-            while (l <= r) {
-                m = (l + r) / 2;
-                if (ends[m] < arr[i]) {
-                    l = m + 1;
-                } else {
-                    r = m - 1;
-                }
-            }
-            ends[l] = arr[i];
-            right = Math.max(l, right);
-            dp[i] = l + 1;
+        ends[0] = arr[0];
+        for (int i=1;i<arr.length;i++) {
+           int l = 0;
+           int r = right;
+           while (l <= r) {
+               int m = (l + r) / 2;
+               if (arr[i] > ends[m]) {
+                   l = m + 1;
+               } else {
+                   r = m - 1;
+               }
+           }
+           ends[l] = arr[i];
+           right = Math.max(right, l);
+           dp[i] = l + 1;
         }
         return dp;
     }

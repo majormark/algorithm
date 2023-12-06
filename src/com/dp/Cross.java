@@ -63,10 +63,7 @@ public class Cross {
         for (int i = 1; i < m + 1; i++) {
             dp[0] = dp[0] && longs[i - 1] == chaim[i - 1];
             for (int j = 1; j < n + 1; j++) {
-                dp[j] = false;
-                if ((dp[j] && longs[i - 1] == chaim[i + j - 1]) || (dp[j - 1] && shorts[j - 1] == chaim[i + j - 1])) {
-                    dp[j] = true;
-                }
+                dp[j] = (dp[j] && longs[i - 1] == chaim[i + j - 1]) || (dp[j - 1] && shorts[j - 1] == chaim[i + j - 1]);
             }
         }
         return dp[n];

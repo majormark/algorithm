@@ -103,4 +103,40 @@ public class ExpressGetDesiredResult {
         }
         return desire ? t[0][ch.length-1] : f[0][ch.length - 1];
     }
+
+    public int num3(String s, boolean desire) {
+        if (s == null || s.equals("")) {
+            return 0;
+        }
+        char[] ch = s.toCharArray();
+        if (!isValid(ch)) {
+            return 0;
+        }
+        int[][] t = new int[ch.length][ch.length];
+        int[][] f = new int[ch.length][ch.length];
+        t[0][0] = ch[0] == '1' ? 1 : 0;
+        f[0][0] = ch[0] == '0' ? 1 : 0;
+        for (int i = 2; i < ch.length; i+=2) {
+            for (int j = i-2; j >= 0; j-=2) {
+                for (int k = j; k < i; k+=2) {
+                    switch (ch[k + 1]) {
+                        case '&':
+                            t[j][i] = t[j][k] * t[k+2][i];
+                            f[i][j] = t[j][k] * f[k+2][i] + f[j][k] * t[k+2][i] + f[j][k] + f[k+2][i];
+                            break;
+                        case '|':
+                            t[j][i] = t[j][k] * t[k+2][i] + t[j][k] * f[k+2][i] + f[j][k] * t[k+2][i];
+                            f[j][i] = f[j][k] * f[k+2][i];
+                            break;
+                        case '^':
+                            t[j][i] = t[j][k] * t[k+2][i] + f[j][k] * f[k+2][i];
+                            f[j][i] = t[j][k] * f[k+2][i] + f[j][k] * t[k+2][i];
+                            break;
+                    }
+                }
+            }
+        }
+        return desire ? t[0][ch.length - 1] : f[0][ch.length - 1];
+    }
+
 }

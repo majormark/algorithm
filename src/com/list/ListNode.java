@@ -10,5 +10,8 @@ public class ListNode {
     ListNode(int val) {
         this.val = val;
     }
+    ListNode(int val, ListNode n) {
+        this.next = n;
+    }
 }
 

@@ -59,7 +59,6 @@ public class Iterator {
         }
         return res;
     }
-
     /**
      * @param root 非递归 中序遍历
      *             类似于先序遍历,调整压栈和打印的位置
@@ -101,8 +100,8 @@ public class Iterator {
             root = s.pop();
             if (root.right == null || root.right == pre) {
                 res.add(root.val);
-                root = s.pop();
                 pre = root;
+                root = null;
             } else {
                 s.push(root);
                 root = root.right;
@@ -111,6 +110,7 @@ public class Iterator {
         return res;
 
     }
+
 
     public void levelIteration(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();

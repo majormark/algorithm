@@ -14,7 +14,7 @@ public class MinEditCost {
             dp[i][0] = i * dc;
         }
         for (int j=0;j<n+1;j++) {
-            dp[0][j] = j * dc;
+            dp[0][j] = j * ic;
         }
         for (int i=1;i<m+1;i++) {
             for (int j=1;j<n+1;j++) {
@@ -31,26 +31,31 @@ public class MinEditCost {
         }
         char[] ch1 = s1.toCharArray();
         char[] ch2 = s2.toCharArray();
-        char[] longs = ch1.length >= ch2.length ? ch1 : ch2;
-        char[] shorts = ch1.length >= ch2.length ? ch2 : ch1;
-        int m = longs.length;
-        int n = shorts.length;
-        int[] dp = new int[n+1];
-        for (int j=0;j<n+1;j++) {
-            dp[j] = j * dc;
+        char[] longs = ch1.length > ch2.length ? ch1 : ch2;
+        char[] shorts = ch1.length > ch2.length ? ch2 : ch1;
+        if (ch1.length < ch2.length) {
+            int tmp = ic;
+            ic = dc;
+            dc = tmp;
         }
-        int tmp = 0;
-        for (int i=1;i<m+1;i++) {
+        int[] dp = new int[shorts.length + 1];
+        for (int i = 0; i < dp.length; i++) {
+            dp[0] = i * ic;
+        }
+        for (int i = 1; i < longs.length + 1; i++) {
             int leftUp = dp[0];
             dp[0] = i * dc;
-            for (int j=1;j<n+1;j++) {
-                tmp = dp[j];
-                dp[j] = longs[i] == shorts[j] ? leftUp : leftUp + rc;
-                dp[j] = Math.min(dp[j], tmp + dc);
-                dp[j] = Math.max(dp[j], dp[j-1] + ic);
+            for (int j = 1; j < shorts.length + 1; j++) {
+                int tmp = dp[j];
+                if (longs[i] == shorts[j]) {
+                    dp[j] = Math.min(dp[j] + dc, leftUp);
+                } else {
+                    dp[j] = Math.min(dp[j] + dc, leftUp + rc);
+                }
+                dp[j] = Math.min(dp[j], dp[j-1] + ic);
                 leftUp = tmp;
             }
         }
-        return dp[n];
+        return dp[dp.length - 1];
     }
 }

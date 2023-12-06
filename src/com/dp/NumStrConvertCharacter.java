@@ -45,4 +45,27 @@ public class NumStrConvertCharacter {
         }
         return cur;
     }
+    public int num3(String s) {
+        if (s == null || s.equals("")) {
+            return 0;
+        }
+        char[] ch = s.toCharArray();
+        int[] dp = new int[ch.length];
+        int last2 = 1;
+        int last1 = 1;
+        int sum = 0;
+        for (int i = 1; i < ch.length; i++) {
+            int tmp = (ch[i-1] - '0') * 10 + (ch[i] - '0');
+            sum = 0;
+            if (ch[i-1] != '0' && tmp < 27) {
+                sum = last2;
+            }
+            if (ch[i] != '0') {
+                sum += last1;
+            }
+            last2 = last1;
+            last1 = sum;
+        }
+        return sum;
+    }
 }
