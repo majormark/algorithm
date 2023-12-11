@@ -1,14 +1,14 @@
 package com.binaryTree;
 
 public class NodeNum {
-    public int nodeNum(TreeNode h) {
+    public int nodeNum(ListNode h) {
         if (h == null) {
             return 0;
         }
         return bs(h, 1, mostLeftLevel(h, 1));
     }
 
-    public int bs(TreeNode n, int l, int h) {
+    public int bs(ListNode n, int l, int h) {
         if (n == null) {
             return 0;
         }
@@ -19,7 +19,7 @@ public class NodeNum {
         }
     }
 
-    public int mostLeftLevel(TreeNode h, int level) {
+    public int mostLeftLevel(ListNode h, int level) {
         while (h != null) {
             h = h.left;
             level++;

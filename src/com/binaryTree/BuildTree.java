@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 public class BuildTree {
 
-    public TreeNode preInToTree(int[] pre, int[] in) {
+    public ListNode preInToTree(int[] pre, int[] in) {
         if (pre == null || in == null) {
             return null;
         }
@@ -18,12 +18,12 @@ public class BuildTree {
         return preIn(pre, 0, pre.length - 1, in, 0, in.length - 1, m);
     }
 
-    public TreeNode preIn(int[] p, int pi, int pj, int[] n, int ni, int nj, HashMap<Integer, Integer> m) {
+    public ListNode preIn(int[] p, int pi, int pj, int[] n, int ni, int nj, HashMap<Integer, Integer> m) {
 
         if (pi > pj) {
             return null;
         }
-        TreeNode h = new TreeNode(p[pi]);
+        ListNode h = new ListNode(p[pi]);
         int idx = m.get(p[pi]);
         int l = idx - ni;
         h.left = preIn(p, pi + 1, pi + l, n, ni, idx - 1, m);
@@ -31,7 +31,7 @@ public class BuildTree {
         return h;
     }
 
-    public TreeNode inPosToTree(int[] in, int[] pos) {
+    public ListNode inPosToTree(int[] in, int[] pos) {
         if (pos == null || in == null) {
             return null;
         }
@@ -42,11 +42,11 @@ public class BuildTree {
         return inPos(in, 0, in.length - 1, pos, 0, pos.length - 1, m);
     }
 
-    public TreeNode inPos(int[] n, int ni, int nj, int[] pos, int pi, int pj, HashMap<Integer, Integer> m) {
+    public ListNode inPos(int[] n, int ni, int nj, int[] pos, int pi, int pj, HashMap<Integer, Integer> m) {
         if (pi > pj) {
             return null;
         }
-        TreeNode h = new TreeNode(pos[pj]);
+        ListNode h = new ListNode(pos[pj]);
         int idx = m.get(pos[pj]);
         int l = idx - ni;
         h.left = inPos(n, ni, idx - 1, pos, pi, pj + l - 1, m);
@@ -54,7 +54,7 @@ public class BuildTree {
         return h;
     }
 
-    public TreeNode prePosToTree(int[] pre, int[] pos) {
+    public ListNode prePosToTree(int[] pre, int[] pos) {
         if (pre == null || pos == null) {
             return null;
         }
@@ -65,8 +65,8 @@ public class BuildTree {
         return prePos(pre, 0, pre.length - 1, pos, 0, pos.length - 1, m);
     }
 
-    public TreeNode prePos(int[] pre, int pi, int pj, int[] pos, int si, int sj, HashMap<Integer, Integer> m) {
-        TreeNode h = new TreeNode(pos[sj--]);
+    public ListNode prePos(int[] pre, int pi, int pj, int[] pos, int si, int sj, HashMap<Integer, Integer> m) {
+        ListNode h = new ListNode(pos[sj--]);
         if (pi == pj) {
             return h;
         }

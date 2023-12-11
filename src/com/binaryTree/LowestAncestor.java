@@ -8,12 +8,12 @@ import java.util.LinkedList;
  * 最近公共祖先系列问题 pg.153
  */
 public class LowestAncestor {
-    public TreeNode lowestAncestor(TreeNode h, TreeNode o1, TreeNode o2) {
+    public ListNode lowestAncestor(ListNode h, ListNode o1, ListNode o2) {
         if (h == null || h == o1 || h == o2) {
             return h;
         }
-        TreeNode left = lowestAncestor(h.left, o1, o2);
-        TreeNode right = lowestAncestor(h.right, o1, o2);
+        ListNode left = lowestAncestor(h.left, o1, o2);
+        ListNode right = lowestAncestor(h.right, o1, o2);
         if (left != null && right != null) {
             return h;
         }
@@ -22,14 +22,14 @@ public class LowestAncestor {
 }
 
 class Record1 {
-    private HashMap<TreeNode, TreeNode> m;
+    private HashMap<ListNode, ListNode> m;
 
-    public Record1(TreeNode h) {
+    public Record1(ListNode h) {
         m = new HashMap<>();
         setMap(h, m);
     }
 
-    public void setMap(TreeNode h, HashMap<TreeNode, TreeNode> m) {
+    public void setMap(ListNode h, HashMap<ListNode, ListNode> m) {
         if (h == null) {
             return;
         }
@@ -43,8 +43,8 @@ class Record1 {
         setMap(h.right, m);
     }
 
-    public TreeNode query(TreeNode o1, TreeNode o2) {
-        HashSet<TreeNode> path = new HashSet<>();
+    public ListNode query(ListNode o1, ListNode o2) {
+        HashSet<ListNode> path = new HashSet<>();
         while (m.containsKey(o1)) {
             path.add(o1);
             o1 = m.get(o1);
@@ -57,15 +57,15 @@ class Record1 {
 }
 
 class Record2 {
-    private HashMap<TreeNode, HashMap<TreeNode, TreeNode>> m;
+    private HashMap<ListNode, HashMap<ListNode, ListNode>> m;
 
-    public Record2(TreeNode h) {
+    public Record2(ListNode h) {
         m = new HashMap<>();
         initMap(h);
         setMap(h);
     }
 
-    public void initMap(TreeNode h) {
+    public void initMap(ListNode h) {
         if (h == null) {
             return;
         }
@@ -74,7 +74,7 @@ class Record2 {
         initMap(h.right);
     }
 
-    public void setMap(TreeNode h) {
+    public void setMap(ListNode h) {
         if (h == null) {
             return;
         }
@@ -84,7 +84,7 @@ class Record2 {
 
     }
 
-    public void headRecord(TreeNode n, TreeNode h) {
+    public void headRecord(ListNode n, ListNode h) {
         if (n == null) {
             return;
         }
@@ -93,7 +93,7 @@ class Record2 {
         headRecord(n.right, h);
     }
 
-    public void subRecord(TreeNode h) {
+    public void subRecord(ListNode h) {
         if (h == null) {
             return;
         }
@@ -102,7 +102,7 @@ class Record2 {
         subRecord(h.right);
     }
 
-    public void preLeft(TreeNode l, TreeNode r, TreeNode h) {
+    public void preLeft(ListNode l, ListNode r, ListNode h) {
         if (l == null) {
             return;
         }
@@ -111,7 +111,7 @@ class Record2 {
         preLeft(l.right, r, h);
     }
 
-    public void preRight(TreeNode l, TreeNode r, TreeNode h) {
+    public void preRight(ListNode l, ListNode r, ListNode h) {
         if (r == null) {
             return;
         }
@@ -123,14 +123,14 @@ class Record2 {
 }
 
 class Query {
-    TreeNode o1;
-    TreeNode o2;
+    ListNode o1;
+    ListNode o2;
 }
 
 class TarJan {
-    private HashMap<TreeNode, LinkedList<TreeNode>> queryMap;
-    private HashMap<TreeNode, LinkedList<Integer>> indexMap;
-    private HashMap<TreeNode, TreeNode> ancestorMap;
+    private HashMap<ListNode, LinkedList<ListNode>> queryMap;
+    private HashMap<ListNode, LinkedList<Integer>> indexMap;
+    private HashMap<ListNode, ListNode> ancestorMap;
     private DisJointSets sets;
 
     public TarJan() {
@@ -140,17 +140,17 @@ class TarJan {
         sets = new DisJointSets();
     }
 
-    public TreeNode[] query(TreeNode h, Query[] queries) {
-        TreeNode[] ans = new TreeNode[queries.length];
+    public ListNode[] query(ListNode h, Query[] queries) {
+        ListNode[] ans = new ListNode[queries.length];
         setQueries(queries, ans);
         sets.makeSets(h);
         setAnswers(h, ans);
         return ans;
     }
 
-    public void setQueries(Query[] queries, TreeNode[] ans) {
-        TreeNode o1;
-        TreeNode o2;
+    public void setQueries(Query[] queries, ListNode[] ans) {
+        ListNode o1;
+        ListNode o2;
         for (int i = 0; i < queries.length; i++) {
             o1 = queries[i].o1;
             o2 = queries[i].o2;
@@ -173,7 +173,7 @@ class TarJan {
         }
     }
 
-    public void setAnswers(TreeNode h, TreeNode[] ans) {
+    public void setAnswers(ListNode h, ListNode[] ans) {
         if (h == null) {
             return;
         }
@@ -183,10 +183,10 @@ class TarJan {
         setAnswers(h.right, ans);
         sets.union(h.right, h);
         ancestorMap.put(sets.findFather(h), h);
-        LinkedList<TreeNode> nList = queryMap.get(h);
+        LinkedList<ListNode> nList = queryMap.get(h);
         LinkedList<Integer> iList = indexMap.get(h);
-        TreeNode n = null;
-        TreeNode nFather = null;
+        ListNode n = null;
+        ListNode nFather = null;
         int index = 0;
         while (nList != null && !nList.isEmpty()) {
             n = nList.poll();
@@ -201,21 +201,21 @@ class TarJan {
 }
 
 class DisJointSets {
-    public HashMap<TreeNode, TreeNode> fatherMap;
-    public HashMap<TreeNode, Integer> rankMap;
+    public HashMap<ListNode, ListNode> fatherMap;
+    public HashMap<ListNode, Integer> rankMap;
 
     public DisJointSets() {
         fatherMap = new HashMap<>();
         rankMap = new HashMap<>();
     }
 
-    public void makeSets(TreeNode h) {
+    public void makeSets(ListNode h) {
         fatherMap.clear();
         rankMap.clear();
         preOrderMake(h);
     }
 
-    public void preOrderMake(TreeNode h) {
+    public void preOrderMake(ListNode h) {
         if (h == null) {
             return;
         }
@@ -225,8 +225,8 @@ class DisJointSets {
         preOrderMake(h.right);
     }
 
-    public TreeNode findFather(TreeNode n) {
-        TreeNode father = fatherMap.get(n);
+    public ListNode findFather(ListNode n) {
+        ListNode father = fatherMap.get(n);
         if (n != father) {
             father = findFather(father);
         }
@@ -234,12 +234,12 @@ class DisJointSets {
         return father;
     }
 
-    public void union(TreeNode a, TreeNode b) {
+    public void union(ListNode a, ListNode b) {
         if (a == null || b == null) {
             return;
         }
-        TreeNode aFather = findFather(a);
-        TreeNode bFather = findFather(b);
+        ListNode aFather = findFather(a);
+        ListNode bFather = findFather(b);
         if (aFather == bFather) {
             return;
         }

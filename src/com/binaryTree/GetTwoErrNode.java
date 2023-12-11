@@ -3,10 +3,10 @@ package com.binaryTree;
 import java.util.Stack;
 
 public class GetTwoErrNode {
-    public TreeNode[] getTwoErrNodes(TreeNode head) {
-        Stack<TreeNode> s = new Stack<>();
-        TreeNode pre = null;
-        TreeNode[] errs = new TreeNode[2];
+    public ListNode[] getTwoErrNodes(ListNode head) {
+        Stack<ListNode> s = new Stack<>();
+        ListNode pre = null;
+        ListNode[] errs = new ListNode[2];
         while (!s.isEmpty() || head != null) {
             while (head != null) {
                 s.push(head.left);
@@ -26,9 +26,9 @@ public class GetTwoErrNode {
         return errs;
     }
 
-    public TreeNode[] getTwoErrParents(TreeNode head, TreeNode err1, TreeNode err2) {
-        TreeNode[] parents = new TreeNode[2];
-        Stack<TreeNode> s = new Stack<>();
+    public ListNode[] getTwoErrParents(ListNode head, ListNode err1, ListNode err2) {
+        ListNode[] parents = new ListNode[2];
+        Stack<ListNode> s = new Stack<>();
         while (!s.isEmpty() || head != null) {
             if (head != null) {
                 s.push(head);
@@ -47,17 +47,17 @@ public class GetTwoErrNode {
         return parents;
     }
 
-    public TreeNode recoverTree(TreeNode head) {
-        TreeNode[] errs = getTwoErrNodes(head);
-        TreeNode[] parents = getTwoErrParents(head, errs[0], errs[1]);
-        TreeNode e1 = errs[0];
-        TreeNode e2 = errs[1];
-        TreeNode e1P = parents[0];
-        TreeNode e2P = parents[1];
-        TreeNode e1L = e1.left;
-        TreeNode e1R = e1.right;
-        TreeNode e2L = e2.left;
-        TreeNode e2R = e2.right;
+    public ListNode recoverTree(ListNode head) {
+        ListNode[] errs = getTwoErrNodes(head);
+        ListNode[] parents = getTwoErrParents(head, errs[0], errs[1]);
+        ListNode e1 = errs[0];
+        ListNode e2 = errs[1];
+        ListNode e1P = parents[0];
+        ListNode e2P = parents[1];
+        ListNode e1L = e1.left;
+        ListNode e1R = e1.right;
+        ListNode e2L = e2.left;
+        ListNode e2R = e2.right;
         if (e1  == head) {
             if (e1.right == e2) {
 

@@ -1,7 +1,7 @@
 package com.binaryTree;
 
 public class BiggestSubBST {
-    public TreeNode biggestSubBST(TreeNode head) {
+    public ListNode biggestSubBST(ListNode head) {
 
         if (head == null) {
             return null;
@@ -9,19 +9,19 @@ public class BiggestSubBST {
         return postOrder(head, new int[3]);
     }
 
-    public TreeNode postOrder(TreeNode head, int[] record) {
+    public ListNode postOrder(ListNode head, int[] record) {
         if (head == null) {
             record[0] = 0;
             record[1] = Integer.MAX_VALUE;
             record[2] = Integer.MIN_VALUE;
         }
-        TreeNode left = head.left;
-        TreeNode right = head.right;
-        TreeNode lBST = postOrder(left, record);
+        ListNode left = head.left;
+        ListNode right = head.right;
+        ListNode lBST = postOrder(left, record);
         int lSize = record[0];
         int lMin = record[1];
         int lMax = record[2];
-        TreeNode rBST = postOrder(right, record);
+        ListNode rBST = postOrder(right, record);
         int rSize = record[0];
         int rMin = record[1];
         int rMax = record[2];

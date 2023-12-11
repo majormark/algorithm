@@ -1,6 +1,6 @@
 package com.string;
 
-import com.binaryTree.TreeNode;
+import com.binaryTree.ListNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,9 +11,9 @@ import java.util.Arrays;
  * Created by major on 16/9/2.
  */
 public class IdenticalTreeTest {
-    TreeNode root = new TreeNode(1);
-    TreeNode subRoot1 = null;
-    TreeNode subRoot2 = null;
+    ListNode root = new ListNode(1);
+    ListNode subRoot1 = null;
+    ListNode subRoot2 = null;
     IdenticalTree idtTree = new IdenticalTree();
     @Before
     public void setUp() throws Exception {
@@ -27,14 +27,14 @@ public class IdenticalTreeTest {
          * /   \
          * 8   9
          */
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
-        root.right.left = new TreeNode(6);
-        root.right.right = new TreeNode(7);
-        root.left.left.left = new TreeNode(8);
-        root.left.right.right = new TreeNode(9);
+        root.left = new ListNode(2);
+        root.right = new ListNode(3);
+        root.left.left = new ListNode(4);
+        root.left.right = new ListNode(5);
+        root.right.left = new ListNode(6);
+        root.right.right = new ListNode(7);
+        root.left.left.left = new ListNode(8);
+        root.left.right.right = new ListNode(9);
 
         /**
          *   subRoot1
@@ -45,11 +45,11 @@ public class IdenticalTreeTest {
          * 8   9
          */
 
-        subRoot1 = new TreeNode(2);
-        subRoot1.left = new TreeNode(4);
-        subRoot1.right = new TreeNode(5);
-        subRoot1.left.left = new TreeNode(8);
-        subRoot1.right.right = new TreeNode(9);
+        subRoot1 = new ListNode(2);
+        subRoot1.left = new ListNode(4);
+        subRoot1.right = new ListNode(5);
+        subRoot1.left.left = new ListNode(8);
+        subRoot1.right.right = new ListNode(9);
 
         /**
          *   subRoot2
@@ -60,10 +60,10 @@ public class IdenticalTreeTest {
          * 8
          */
 
-        subRoot2 = new TreeNode(2);
-        subRoot2.left = new TreeNode(4);
-        subRoot2.right = new TreeNode(5);
-        subRoot2.left.left = new TreeNode(8);
+        subRoot2 = new ListNode(2);
+        subRoot2.left = new ListNode(4);
+        subRoot2.right = new ListNode(5);
+        subRoot2.left.left = new ListNode(8);
 
 
     }

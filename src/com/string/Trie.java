@@ -1,7 +1,5 @@
 package com.string;
 
-import com.binaryTree.TreeNode;
-
 public class Trie {
 
     private TrieNode root;

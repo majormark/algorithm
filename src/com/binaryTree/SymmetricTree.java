@@ -11,10 +11,10 @@ import java.util.Stack;
  */
 public class SymmetricTree {
 
-    public boolean isSymmetric(TreeNode root) {
+    public boolean isSymmetric(ListNode root) {
         return check(root, root);
     }
-    public boolean check(TreeNode p, TreeNode q) {
+    public boolean check(ListNode p, ListNode q) {
         if (p == null && q == null) {
             return true;
         }
@@ -24,9 +24,9 @@ public class SymmetricTree {
         return p.val == q.val && check(p.left, q.right) && check(p.right, q.left);
     }
 
-    public boolean check2(TreeNode p, TreeNode q) {
-        Stack<TreeNode> sp = new Stack<>();
-        Stack<TreeNode> sq = new Stack<>();
+    public boolean check2(ListNode p, ListNode q) {
+        Stack<ListNode> sp = new Stack<>();
+        Stack<ListNode> sq = new Stack<>();
 
         while ((!sp.isEmpty() || p != null) && (!sq.isEmpty() || q != null)) {
             while (p != null && q != null) {
@@ -54,8 +54,8 @@ public class SymmetricTree {
         return true;
     }
 
-    public boolean check3(TreeNode u, TreeNode v) {
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
+    public boolean check3(ListNode u, ListNode v) {
+        Queue<ListNode> q = new LinkedList<ListNode>();
         q.offer(u);
         q.offer(v);
         while (!q.isEmpty()) {

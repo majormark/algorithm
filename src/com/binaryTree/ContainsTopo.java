@@ -9,11 +9,11 @@ public class ContainsTopo {
      * @param t2
      * @return
      */
-    public boolean contains(TreeNode head, TreeNode t2) {
+    public boolean contains(ListNode head, ListNode t2) {
         return check(head, t2) || contains(head.left, t2) || contains(head.right, t2);
     }
 
-    public boolean check(TreeNode t1, TreeNode t2) {
+    public boolean check(ListNode t1, ListNode t2) {
         if (t2 == null) {
             return true;
         }
@@ -23,13 +23,13 @@ public class ContainsTopo {
         return check(t1.left, t2.left) && check(t1.right, t2.right);
     }
 
-    public boolean containsTopoSubTree(TreeNode head, TreeNode t2) {
+    public boolean containsTopoSubTree(ListNode head, ListNode t2) {
         String t1Str = serialByPre(head);
         String t2Str = serialByPre(t2);
         return new KMP().getIndexOf(t1Str, t2Str) != -1 ;
     }
 
-    public String serialByPre(TreeNode head) {
+    public String serialByPre(ListNode head) {
         if (head == null) {
             return "#!";
         }

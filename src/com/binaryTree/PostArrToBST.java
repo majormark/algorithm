@@ -34,16 +34,16 @@ public class PostArrToBST {
 
     }
 
-    public TreeNode postArrToBST(int[] arr) {
+    public ListNode postArrToBST(int[] arr) {
         if (arr == null || arr.length == 0) {
             return null;
         }
         return post(arr, 0, arr.length - 1);
     }
 
-    public TreeNode post(int[] arr, int start, int end) {
+    public ListNode post(int[] arr, int start, int end) {
         if (start == end) {
-            return new TreeNode(arr[start]);
+            return new ListNode(arr[start]);
         }
         int less = -1;
         int more = end;
@@ -54,7 +54,7 @@ public class PostArrToBST {
                 more = more == end ? i : more;
             }
         }
-        TreeNode n = new TreeNode(arr[end]);
+        ListNode n = new ListNode(arr[end]);
         n.left = post(arr, start, less);
         n.right = post(arr, more, end-1);
         return n;
