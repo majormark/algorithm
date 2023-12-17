@@ -1,14 +1,14 @@
 package com.binaryTree;
 
 public class MaxHeight {
-    public int maxDepth(ListNode root) {
+    public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;
         }
         return posOrder(root, 1);
     }
 
-    public int posOrder(ListNode h, int level) {
+    public int posOrder(TreeNode h, int level) {
         if (h == null) {
             return level - 1;
         }

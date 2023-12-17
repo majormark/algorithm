@@ -4,14 +4,14 @@ package com.binaryTree;
  * 二叉树节点间最大距离pg.170
  */
 public class MaxDistance {
-    public int maxDistance(ListNode h) {
+    public int maxDistance(TreeNode h) {
         if (h == null) {
             return 0;
         }
         return postOrder(h, new int[1]);
     }
 
-    public int postOrder(ListNode h, int[] record) {
+    public int postOrder(TreeNode h, int[] record) {
         if (h == null) {
             record[0] = 0;
             return 0;

@@ -3,10 +3,10 @@ package com.binaryTree;
 import java.util.LinkedList;
 
 public class PrintEdge {
-    public LinkedList<Integer> printEdge1(ListNode head) {
+    public LinkedList<Integer> printEdge1(TreeNode head) {
         LinkedList<Integer> res = new LinkedList<>();
         int height = getHeight(head, 0);
-        ListNode[][] nodeMap = new ListNode[height][2];
+        TreeNode[][] nodeMap = new TreeNode[height][2];
         setEdgeMap(head, nodeMap, 0);
         for (int i=0;i< nodeMap.length;i++) {
             res.add(nodeMap[i][0].val);
@@ -18,7 +18,7 @@ public class PrintEdge {
         return res;
     }
 
-    public void printLeafNotInMap(ListNode n, int l, ListNode[][] nodeMap, LinkedList<Integer> res) {
+    public void printLeafNotInMap(TreeNode n, int l, TreeNode[][] nodeMap, LinkedList<Integer> res) {
         if (n == null) {
             return;
         }
@@ -28,14 +28,14 @@ public class PrintEdge {
         printLeafNotInMap(n.left, l + 1, nodeMap, res);
         printLeafNotInMap(n.right, l + 1, nodeMap, res);
     }
-    public int getHeight(ListNode node, int l) {
+    public int getHeight(TreeNode node, int l) {
         if (node == null) {
             return l;
         }
         return Math.max(getHeight(node.left, l + 1), getHeight(node.right, l + 1));
     }
 
-    public void setEdgeMap(ListNode node, ListNode[][] nodeMap, int l) {
+    public void setEdgeMap(TreeNode node, TreeNode[][] nodeMap, int l) {
         if (node == null) {
             return;
         }
@@ -45,7 +45,7 @@ public class PrintEdge {
         setEdgeMap(node.right, nodeMap, l + 1);
     }
 
-    public LinkedList<Integer> printEdge2(ListNode head) {
+    public LinkedList<Integer> printEdge2(TreeNode head) {
         LinkedList<Integer> res = new LinkedList<>();
         if (head == null) {
             return res;
@@ -60,7 +60,7 @@ public class PrintEdge {
         return res;
     }
 
-    void printLeftEdge(ListNode node, boolean print, LinkedList<Integer> res) {
+    void printLeftEdge(TreeNode node, boolean print, LinkedList<Integer> res) {
         if (node == null) {
             return;
         }
@@ -71,7 +71,7 @@ public class PrintEdge {
         printLeftEdge(node.right, print && node.left == null, res);
     }
 
-    void printRightEdge(ListNode node, boolean print, LinkedList<Integer> res) {
+    void printRightEdge(TreeNode node, boolean print, LinkedList<Integer> res) {
         if (node == null) {
             return;
         }

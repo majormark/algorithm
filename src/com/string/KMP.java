@@ -16,7 +16,7 @@ public class KMP {
                 mi++;
             } else if (nextArr[mi] == -1) {
                 si++;
-            }else {
+            } else {
                 mi = nextArr[mi];
             }
         }
@@ -24,7 +24,7 @@ public class KMP {
     }
 
     public int[] getNextArray(char[] ms) {
-        if (ms.length  == 1) {
+        if (ms.length == 1) {
             return new int[]{-1};
         }
         int[] next = new int[ms.length];
@@ -33,7 +33,7 @@ public class KMP {
         int pos = 2;
         int cn = 0;
         while (pos < ms.length) {
-            if (ms[cn] == ms[pos-1]) {
+            if (ms[cn] == ms[pos - 1]) {
                 next[pos++] = ++cn;
             } else if (cn > 0) {
                 cn = next[cn];
@@ -43,4 +43,49 @@ public class KMP {
         }
         return next;
     }
+
+
+    public int[] getNextArray2(char[] ch) {
+        if (ch.length == 1) {
+            return new int[]{-1};
+        }
+        int[] next = new int[ch.length];
+        next[0] = -1;
+        next[1] = 0;
+        int cn = 0;
+        int idx = 2;
+        while (idx < ch.length) {
+            if (ch[idx - 1] == ch[cn]) {
+                next[idx++] = ++cn;
+            } else if (cn == 0) {
+                next[idx++] = 0;
+            } else {
+                cn = next[cn];
+            }
+        }
+        return next;
+    }
+
+    public int strStr(String haystack, String needle) {
+        if (haystack == null || needle == null || needle.length() < 1 || needle.length() > haystack.length()) {
+            return -1;
+        }
+        char[] chs = haystack.toCharArray();
+        char[] chm = needle.toCharArray();
+        int[] nextArr = getNextArray2(chm);
+        int si = 0;
+        int mi = 0;
+        while (si < chs.length && mi < chm.length) {
+            if (chs[si] == chm[mi]) {
+                si++;
+                mi++;
+            } else if (mi == 0) {
+                si++;
+            } else {
+                mi = nextArr[mi];
+            }
+        }
+        return mi == chm.length ? si - mi : -1;
+    }
+
 }

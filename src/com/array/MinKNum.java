@@ -16,7 +16,7 @@ public class MinKNum {
     public void heapAdjust(int[] arr, int index, int length) {
         int tmp = arr[index];
         int child;
-        for (; index < length; index = child) {
+        for (; index * 2 + 1< length; index = child) {
             child = index * 2 + 1;
             if (child < length - 1 && arr[child + 1] > arr[child]) child++;
             if (arr[index] < arr[child]) {
@@ -63,7 +63,7 @@ public class MinKNum {
 
     public void heapify(int[] heap, int idx, int size) {
         int child;
-        for (; idx < size; idx = child) {
+        for (; idx *2+1< size; idx = child) {
             child = idx * 2 + 1;
             if (child < size - 1 && heap[child] < heap[child + 1]) child++;
             if (heap[child] > heap[idx]) {

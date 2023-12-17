@@ -50,4 +50,30 @@ public class SlideWindow {
         }
         return result;
     }
+
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length <= 1 || k < 2) {
+            return nums;
+        }
+        Deque<Integer> dq = new LinkedList<>();
+
+        int[] max = new int[nums.length - k + 1];
+        for (int i = 0; i < nums.length; i++) {
+            if (!dq.isEmpty() && dq.peekFirst() == i - k) {
+                dq.pollFirst();
+            }
+            while (!dq.isEmpty()) {
+                if (nums[dq.peekLast()] < nums[i]) {
+                    dq.pollLast();
+                } else {
+                    break;
+                }
+            }
+            dq.offerLast(i);
+            if (i >= k - 1) {
+                max[i - k + 1] = nums[dq.peekFirst()];
+            }
+        }
+        return max;
+    }
 }

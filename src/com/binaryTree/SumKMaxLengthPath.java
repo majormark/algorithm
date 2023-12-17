@@ -7,14 +7,14 @@ import java.util.HashMap;
  * 在二叉树中找到累加和未指定值的最长路径长度
  */
 public class SumKMaxLengthPath {
-    public int maxLength(ListNode head, int k) {
+    public int maxLength(TreeNode head, int k) {
         int len = 0;
         HashMap<Integer, Integer> m = new HashMap<>();
         m.put(0, 0);
         return preOrder(head, 1, head.val, k, 0, m);
     }
 
-    public int preOrder(ListNode node, int level, int preSum, int k, int max, HashMap<Integer, Integer> m) {
+    public int preOrder(TreeNode node, int level, int preSum, int k, int max, HashMap<Integer, Integer> m) {
         if (node == null) {
             return max;
         }

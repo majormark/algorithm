@@ -1,6 +1,6 @@
 package com.string;
 
-import com.binaryTree.ListNode;
+import com.binaryTree.TreeNode;
 
 import java.util.Stack;
 
@@ -17,7 +17,7 @@ import java.util.Stack;
 
 
 public class IdenticalTree {
-    public boolean chkIdentical(ListNode A, ListNode B) {
+    public boolean chkIdentical(TreeNode A, TreeNode B) {
         // write code here
         if(A == null || B == null) {
             return  false;
@@ -46,13 +46,13 @@ public class IdenticalTree {
     }
 
     //二叉树的
-    public String serialize(ListNode root) {
+    public String serialize(TreeNode root) {
         if(root == null) {
             return null;
         }
         StringBuilder str = new StringBuilder("");
-        Stack<ListNode> stack = new Stack();
-        ListNode node = root;
+        Stack<TreeNode> stack = new Stack();
+        TreeNode node = root;
         while(node != null || stack.size() > 0) {
             while(node != null) {
                 str.append(node.val).append("!");

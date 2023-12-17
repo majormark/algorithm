@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class BSTTopoSize {
 
     // 遍历每个节点，以每个节点为头，统计最大搜索二叉树的数量
-    public int bstTopoSize1(ListNode head) {
+    public int bstTopoSize1(TreeNode head) {
         if (head == null) {
             return 0;
         }
@@ -20,7 +20,7 @@ public class BSTTopoSize {
     }
 
     // 遍历h树，检查每个节点是否符合搜索二叉树，并统计数量
-    public int maxTopo(ListNode h, ListNode n) {
+    public int maxTopo(TreeNode h, TreeNode n) {
         if (h != null && n != null && isBSTNode(h, n, n.val)) {
             return maxTopo(h, n.left) + maxTopo(h, n.right) + 1;
         }
@@ -28,7 +28,7 @@ public class BSTTopoSize {
     }
 
     // 检查节点n在h这棵树，是否符合搜索二叉树
-    public boolean isBSTNode(ListNode h, ListNode n, int value) {
+    public boolean isBSTNode(TreeNode h, TreeNode n, int value) {
         if (h == null) {
             return false;
         }
@@ -38,15 +38,15 @@ public class BSTTopoSize {
         return isBSTNode(h.val > value ? h.left : h.right, n, value);
     }
 
-    public int bstTopoSize2(ListNode head) {
+    public int bstTopoSize2(TreeNode head) {
         if (head == null) {
             return 0;
         }
-        HashMap<ListNode, Record> m = new HashMap<>();
+        HashMap<TreeNode, Record> m = new HashMap<>();
         return postOrder(head, m);
     }
 
-    public int postOrder(ListNode h, HashMap<ListNode, Record> m) {
+    public int postOrder(TreeNode h, HashMap<TreeNode, Record> m) {
         if (h == null) {
             return 0;
         }
@@ -61,7 +61,7 @@ public class BSTTopoSize {
         m.put(h, new Record(lNum, rNum));
         return Math.max(lNum + rNum + 1, Math.max(ls, rs));
     }
-    public int modifyMap(ListNode n, int v, HashMap<ListNode, Record> m, boolean isLeft) {
+    public int modifyMap(TreeNode n, int v, HashMap<TreeNode, Record> m, boolean isLeft) {
         if (n == null || !m.containsKey(n)) {
             return 0;
         }

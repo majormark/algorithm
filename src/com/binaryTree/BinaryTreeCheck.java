@@ -11,16 +11,16 @@ public class BinaryTreeCheck {
      * @param h
      * @return
      */
-    public boolean isBST(ListNode h) {
+    public boolean isBST(TreeNode h) {
         return inOrderCheckBST(h);
     }
 
-    public boolean inOrderCheckBST(ListNode h) {
+    public boolean inOrderCheckBST(TreeNode h) {
         if (h == null) {
             return false;
         }
-        Stack<ListNode> s = new Stack<>();
-        ListNode pre = null;
+        Stack<TreeNode> s = new Stack<>();
+        TreeNode pre = null;
         while (!s.isEmpty() || h != null) {
             if (h != null) {
                 s.push(h);
@@ -37,12 +37,12 @@ public class BinaryTreeCheck {
         return true;
     }
 
-    public boolean morrisInOrderCheckBST(ListNode h) {
+    public boolean morrisInOrderCheckBST(TreeNode h) {
         if (h == null) {
             return false;
         }
-        ListNode cur = null;
-        ListNode pre = null;
+        TreeNode cur = null;
+        TreeNode pre = null;
         boolean res = true;
         while (h != null) {
             cur = h.left;
@@ -70,13 +70,13 @@ public class BinaryTreeCheck {
     /**
      * 判断是否为完全二叉树
      */
-    public boolean isCBT(ListNode h) {
+    public boolean isCBT(TreeNode h) {
         if (h == null) {
             return false;
         }
-        Queue<ListNode> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.offer(h);
-        ListNode n = null;
+        TreeNode n = null;
         boolean isLeaf = false;
         while (!q.isEmpty()) {
             n = q.poll();

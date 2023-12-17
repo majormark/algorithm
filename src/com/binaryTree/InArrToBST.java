@@ -5,19 +5,19 @@ package com.binaryTree;
  */
 public class InArrToBST {
 
-    public ListNode generateTree(int[] arr) {
+    public TreeNode generateTree(int[] arr) {
         if (arr == null || arr.length == 0) {
             return null;
         }
         return generate(arr, 0, arr.length-1);
     }
 
-    public ListNode generate(int[] arr, int start, int end) {
+    public TreeNode generate(int[] arr, int start, int end) {
         if (start == end) {
-            return new ListNode(arr[start]);
+            return new TreeNode(arr[start]);
         }
         int mid = (start + end) / 2;
-        ListNode n = new ListNode(mid);
+        TreeNode n = new TreeNode(mid);
         n.left = generate(arr, start, mid);
         n.right = generate(arr, mid + 1, end);
         return n;

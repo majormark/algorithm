@@ -4,12 +4,12 @@ package com.binaryTree;
  * pg.144 判断二叉树是否为平衡二叉树
  */
 public class IsBalanceBT {
-    public boolean isBalance(ListNode head) {
+    public boolean isBalance(TreeNode head) {
         boolean[] res = new boolean[]{true};
         getHeight(head, 1, res);
         return res[0];
     }
-    public int getHeight(ListNode head, int level, boolean[] res) {
+    public int getHeight(TreeNode head, int level, boolean[] res) {
         if (head == null) {
             return level;
         }

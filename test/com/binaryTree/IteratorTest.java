@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  */
 public class IteratorTest {
     Iterator itr = new Iterator();
-    ListNode root = new ListNode(1);
+    TreeNode root = new TreeNode(1);
 
     @Test
     public void postOrderIteration() throws Exception {

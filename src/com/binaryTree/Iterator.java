@@ -10,7 +10,7 @@ import java.util.*;
 public class Iterator {
 
     //递归 先序遍历
-    public void preOrderRecursion(ListNode root) {
+    public void preOrderRecursion(TreeNode root) {
         if (root != null) {
             System.out.println(root.val);
             preOrderRecursion(root.left);
@@ -19,7 +19,7 @@ public class Iterator {
     }
 
     //递归 中序遍历
-    public List<Integer> inorderTraversal(ListNode root) {
+    public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
         if (root != null) {
             inorderTraversal(root.left);
@@ -30,7 +30,7 @@ public class Iterator {
     }
 
     //递归 后序遍历
-    public void postOrderRecursion(ListNode root) {
+    public void postOrderRecursion(TreeNode root) {
         if (root != null) {
             preOrderRecursion(root.left);
             preOrderRecursion(root.right);
@@ -42,9 +42,9 @@ public class Iterator {
      * @param root 非递归 先序遍历
      *             先遍历左子树,先读取值然后后压栈,直到遇到null以后,出栈,得到右子树,继续之前的遍历
      */
-    public List<Integer> preOrderIteration(ListNode root) {
-        Stack<ListNode> stack = new Stack<>();
-        ListNode node = root;
+    public List<Integer> preOrderIteration(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
         List<Integer> res = new LinkedList<>();
         while (node != null || stack.size() > 0) {
             while (node != null) {
@@ -59,16 +59,17 @@ public class Iterator {
         }
         return res;
     }
+
     /**
      * @param root 非递归 中序遍历
      *             类似于先序遍历,调整压栈和打印的位置
      *             先遍历左子树,然后遇到null,出栈,打印值,得到右子树,重复之前的步骤
      */
-    public List<Integer> inOrderIteration(ListNode root) {
+    public List<Integer> inOrderIteration(TreeNode root) {
 
         List<Integer> res = new LinkedList<>();
-        ListNode node = root;
-        Stack<ListNode> stack = new Stack<>();
+        TreeNode node = root;
+        Stack<TreeNode> stack = new Stack<>();
         while (node != null || stack.size() > 0) {
             while (node != null) {
                 stack.push(node);
@@ -88,10 +89,10 @@ public class Iterator {
      *             使用一个结点记录前一个输出
      *             同样先遍历左子树,直到遇到null,打印该结点,取栈顶元素的右节点但该元素不出栈,只有当右节点为空或等于前一个输出时,才打印该节点
      */
-    public List<Integer> postOrderIteration(ListNode root) {
+    public List<Integer> postOrderIteration(TreeNode root) {
         List<Integer> res = new LinkedList<>();
-        Stack<ListNode> s = new Stack<>();
-        ListNode pre = null;
+        Stack<TreeNode> s = new Stack<>();
+        TreeNode pre = null;
         while (!s.isEmpty() || root != null) {
             while (root != null) {
                 s.push(root);
@@ -112,9 +113,9 @@ public class Iterator {
     }
 
 
-    public void levelIteration(ListNode root) {
-        Queue<ListNode> queue = new LinkedList<>();
-        ListNode node = root;
+    public void levelIteration(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        TreeNode node = root;
         node = root;
         queue.add(node);
         while (queue.size() > 0) {
@@ -129,13 +130,13 @@ public class Iterator {
         }
     }
 
-    public List<Integer> morrisIn(ListNode head) {
+    public List<Integer> morrisIn(TreeNode head) {
         List<Integer> res = new LinkedList<>();
         if (head == null) {
             return res;
         }
-        ListNode cur1 = head;
-        ListNode cur2;
+        TreeNode cur1 = head;
+        TreeNode cur2;
         while (cur1 != null) {
             cur2 = cur1.left;
             if (cur2 != null) {
@@ -156,13 +157,13 @@ public class Iterator {
         return res;
     }
 
-    public List<Integer> morrisPre(ListNode head) {
+    public List<Integer> morrisPre(TreeNode head) {
         List<Integer> res = new LinkedList<>();
         if (head == null) {
             return res;
         }
-        ListNode cur1 = head;
-        ListNode cur2;
+        TreeNode cur1 = head;
+        TreeNode cur2;
         while (cur1 != null) {
             cur2 = cur1.left;
             if (cur2 != null) {
@@ -185,13 +186,13 @@ public class Iterator {
         return res;
     }
 
-    public List<Integer> morrisPos(ListNode head) {
+    public List<Integer> morrisPos(TreeNode head) {
         List<Integer> res = new LinkedList<>();
         if (head == null) {
             return res;
         }
-        ListNode cur1 = head;
-        ListNode cur2;
+        TreeNode cur1 = head;
+        TreeNode cur2;
         while (cur1 != null) {
             cur2 = cur1.left;
             if (cur2 != null) {
@@ -214,9 +215,9 @@ public class Iterator {
         return res;
     }
 
-    public void printEdge(ListNode node, List<Integer> res) {
-        ListNode tail = reverseNode(node);
-        ListNode cur = tail;
+    public void printEdge(TreeNode node, List<Integer> res) {
+        TreeNode tail = reverseNode(node);
+        TreeNode cur = tail;
         while (cur != null) {
             res.add(cur.val);
             cur = cur.right;
@@ -224,10 +225,10 @@ public class Iterator {
         reverseNode(tail);
     }
 
-    public ListNode reverseNode(ListNode node) {
-        ListNode cur = node;
-        ListNode pre = null;
-        ListNode next = null;
+    public TreeNode reverseNode(TreeNode node) {
+        TreeNode cur = node;
+        TreeNode pre = null;
+        TreeNode next = null;
         while (cur != null) {
             next = cur.right;
             cur.right = pre;
@@ -237,15 +238,15 @@ public class Iterator {
         return pre;
     }
 
-    public void levelTraversalWithLine(ListNode head) {
-        Queue<ListNode> q = new LinkedList<>();
-        ListNode last = head;
-        ListNode nLast = null;
+    public void levelTraversalWithLine(TreeNode head) {
+        Queue<TreeNode> q = new LinkedList<>();
+        TreeNode last = head;
+        TreeNode nLast = null;
         q.offer(head);
         int line = 1;
         System.out.print("Level " + (line++) + " : ");
         while (!q.isEmpty()) {
-            ListNode n = q.poll();
+            TreeNode n = q.poll();
             System.out.print(n.val + " ");
             if (n.left != null) {
                 q.offer(n.left);
@@ -262,16 +263,16 @@ public class Iterator {
         }
     }
 
-    public void zigzag(ListNode head) {
-        Deque<ListNode> dq = new LinkedList<>();
-        ListNode last = head;
-        ListNode nLast = head.left;
+    public void zigzag(TreeNode head) {
+        Deque<TreeNode> dq = new LinkedList<>();
+        TreeNode last = head;
+        TreeNode nLast = head.left;
         int level = 1;
         System.out.print("Level " + (level++) + " from left to right: ");
         dq.offer(head);
         while (!dq.isEmpty()) {
             boolean l2r = level % 2 == 1;
-            ListNode n = null;
+            TreeNode n = null;
             if (l2r) {
                 n = dq.pollFirst();
                 nLast = nLast == null ? n.left : nLast;
@@ -303,5 +304,38 @@ public class Iterator {
             }
 
         }
+    }
+
+
+    //102. Binary Tree Level Order Traversal
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
+        if (root == null) {
+            return res;
+        }
+        TreeNode node = root;
+        TreeNode last = node;
+        TreeNode nLast = null;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(node);
+        List<Integer> list = new LinkedList<>();
+        while (!q.isEmpty()) {
+            node = q.poll();
+            list.add(node.val);
+            if (node.left != null) {
+                q.offer(node.left);
+                nLast = node.left;
+            }
+            if (node.right != null) {
+                q.offer(node.right);
+                nLast = node.right;
+            }
+            if (node == last) {
+                last = nLast;
+                res.add(list);
+                list = new LinkedList<>();
+            }
+        }
+        return res;
     }
 }
