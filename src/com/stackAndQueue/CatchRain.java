@@ -45,7 +45,7 @@ public class CatchRain {
                 stack.pop();
                 stack.push(i);
             } else {
-                while (height[stack.peek()] < height[i]) {
+                while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
                     int mid = stack.pop();
                     if (stack.isEmpty()) {
                         break;
@@ -53,7 +53,7 @@ public class CatchRain {
                     int left = stack.peek();
                     int w = i - left - 1;
                     int h = Math.min(height[left], height[i]) - height[mid];
-                    res += w * h;
+                    if (w * h > 0) res += w * h;
                 }
                 stack.push(i);
             }
