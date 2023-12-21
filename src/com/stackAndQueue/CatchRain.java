@@ -2,6 +2,7 @@ package com.stackAndQueue;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * 题目：接雨水
@@ -27,5 +28,36 @@ public class CatchRain {
             stack.push(i);
         }
         return ans;
+    }
+
+    public int trap2(int[] height) {
+        Stack<Integer> stack = new Stack<>();
+        int res = 0;
+        for (int i = 0; i < height.length; i++) {
+            if (stack.isEmpty()) {
+                stack.push(i);
+                continue;
+            }
+            int top = stack.peek();
+            if (height[top] > height[i]) {
+                stack.push(i);
+            } else if (height[top] == height[i]) {
+                stack.pop();
+                stack.push(i);
+            } else {
+                while (height[stack.peek()] < height[i]) {
+                    int mid = stack.pop();
+                    if (stack.isEmpty()) {
+                        break;
+                    }
+                    int left = stack.peek();
+                    int w = i - left - 1;
+                    int h = Math.min(height[left], height[i]) - height[mid];
+                    res += w * h;
+                }
+                stack.push(i);
+            }
+        }
+        return res;
     }
 }

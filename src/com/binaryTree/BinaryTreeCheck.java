@@ -105,4 +105,21 @@ public class BinaryTreeCheck {
         }
         return true;
     }
+
+    public boolean isBalanced(TreeNode root) {
+        return process(root, new int[1]);
+    }
+
+    public boolean process(TreeNode node, int[] height) {
+        if (node == null) {
+            height[0] = 0;
+            return true;
+        }
+        boolean isBaLeft = process(node.left, height);
+        int leftH = height[0];
+        boolean isBaRight = process(node.right, height);
+        int rightH = height[0];
+        height[0] = 1 + Math.max(leftH, rightH);
+        return isBaLeft && isBaRight && (Math.abs(leftH - rightH) < 2);
+    }
 }

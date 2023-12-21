@@ -28,4 +28,26 @@ public class QuickSort {
         return left;
     }
 
+    public static int first, last;
+
+    public static void partition2(int[] arr, int left, int right, int x) {
+        int i = left;
+        first = left;
+        last = right;
+        while (i <= last) {
+            if (arr[i] < x) {
+                swap(arr, i++, first++);
+            } else if (arr[i] == x) {
+                i++;
+            } else  {
+                swap(arr, i, last--);
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
 }
