@@ -36,7 +36,6 @@ public class BinaryTreeCheck {
         }
         return true;
     }
-
     public boolean morrisInOrderCheckBST(TreeNode h) {
         if (h == null) {
             return false;
