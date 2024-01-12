@@ -21,38 +21,33 @@ public class NumTrees {
         return num[n];
     }
 
-    public List<TreeNode> generateTree(int n) {
-        return generate(0, n);
+
+    public List<TreeNode> generateTrees(int n) {
+        return generate2(1, n);
     }
 
-    public List<TreeNode> generate(int start, int end) {
+    public List<TreeNode> generate2(int start, int end) {
         List<TreeNode> res = new LinkedList<>();
         if (start > end) {
-            return null;
-        }
-        for (int i = start; i < end + 1; i++) {
-            TreeNode h = new TreeNode(i);
-            List<TreeNode> lSubs = generate(start, i - 1);
-            List<TreeNode> rSubs = generate(i+1,end);
-            for (TreeNode l : lSubs) {
-                for (TreeNode r : rSubs) {
-                    h.left = l;
-                    h.right = r;
-                    res.add(cloneTree(h));
+            res.add(null);
+        };
+        for (int i = start; i <= end; i++) {
+            List<TreeNode> lSubs = generate2(start, i- 1);
+            List<TreeNode> rSubs = generate2(i+1, end);
+            for(TreeNode lSub : lSubs) {
+                for (TreeNode rSub : rSubs) {
+                    TreeNode h = new TreeNode(i);
+                    h.left = lSub;
+                    h.right = rSub;
+                    res.add(h);
                 }
             }
         }
         return res;
     }
 
-    public TreeNode cloneTree(TreeNode h) {
-        if (h == null) {
-            return null;
-        }
-        TreeNode newH = new TreeNode(h.val);
-        newH.left = cloneTree(h.left);
-        newH.right = cloneTree(h.right);
-        return newH;
+    public static void main(String[] args) {
+        List<TreeNode> res = new NumTrees().generateTrees(3);
+        System.out.println(res);
     }
-
 }

@@ -1,4 +1,4 @@
-package com.dp;
+package com.dp.subsequence;
 
 public class LongestCommonSubstring {
     public int[][] getDp(char[] s1, char[] s2) {

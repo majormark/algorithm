@@ -1,4 +1,4 @@
-package com.dp;
+package com.dp.subsequence;
 
 public class LongestCommonSubsequence {
     public int[][] getDp(char[] s1, char[] s2) {
@@ -50,5 +50,33 @@ public class LongestCommonSubsequence {
             }
         }
         return res.toString();
+    }
+
+    public int longestCommonSubsequence(String text1, String text2) {
+        char[] ch1 = text1.toCharArray();
+        char[] ch2 = text2.toCharArray();
+        int[][] dp = new int[ch1.length + 1][ch2.length + 1];
+        for (int i = 1; i < ch1.length + 1; i++) {
+            for (int j = 1; j < ch2.length + 1; j++) {
+                if (ch1[i-1] == ch2[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+                else dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j]);
+            }
+        }
+        return dp[ch1.length][ch2.length];
+    }
+    public int longestCommonSubsequence2(String text1, String text2) {
+        char[] ch1 = text1.toCharArray();
+        char[] ch2 = text2.toCharArray();
+        int[] dp = new int[ch2.length + 1];
+        for (int i = 1; i < ch1.length + 1; i++) {
+            int pre = dp[0];
+            for (int j = 1; j < ch2.length + 1; j++) {
+                int tmp = dp[j];
+                if (ch1[i-1] == ch2[j-1]) dp[j] = pre + 1;
+                else dp[j] = Math.max(dp[j-1], dp[j]);
+                pre = tmp;
+            }
+        }
+        return dp[ch2.length];
     }
 }

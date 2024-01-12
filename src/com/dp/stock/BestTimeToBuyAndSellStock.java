@@ -1,4 +1,4 @@
-package com.dp;
+package com.dp.stock;
 
 public class BestTimeToBuyAndSellStock {
     //121. Best Time to Buy and Sell Stock
