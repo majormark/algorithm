@@ -45,36 +45,22 @@ public class MergeKSortedLists {
         return head.next;
     }
 
-    class Status implements Comparable<Status> {
-        int val;
-        ListNode ptr;
-
-        public Status(int val, ListNode n) {
-            this.val = val;
-            this.ptr = n;
-        }
-
-        @Override
-        public int compareTo(Status o) {
-            return this.val - o.val;
-        }
-    }
 
     public ListNode mergeKLists2(ListNode[] lists) {
-        PriorityQueue<Status> pq = new PriorityQueue<>();
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((n1, n2) -> n1.val - n2.val);
         for (ListNode n : lists) {
             if (n != null) {
-                pq.offer(new Status(n.val, n));
+                pq.offer(n);
             }
         }
         ListNode head = new ListNode(0);
         ListNode tail = head;
         while (!pq.isEmpty()) {
-            Status s = pq.poll();
-            tail.next = s.ptr;
+            ListNode s = pq.poll();
+            tail.next = s;
             tail = tail.next;
-            if (s.ptr.next != null) {
-                pq.offer(new Status(s.ptr.next.val, s.ptr.next));
+            if (s.next != null) {
+                pq.offer(s.next);
             }
         }
 
