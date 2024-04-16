@@ -1,4 +1,6 @@
-package com.binaryTree;
+package com.binaryTree.pathSum;
+
+import com.binaryTree.TreeNode;
 
 import java.util.HashMap;
 
